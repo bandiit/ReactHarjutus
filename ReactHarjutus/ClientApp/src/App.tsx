@@ -6,14 +6,14 @@ import Counter from './components/Counter';
 import FetchData from './components/FetchData';
 
 import './custom.css'
-import { People } from './components/people';
-import { PersonDetails } from './components/PersonDetails';
+import People from './components/people';
+import PersonDetails from './components/PeopleDetails';
 
 export default () => (
     <Layout>
         <Route exact path='/' component={Home} />
         <Route exact path='/people' component={People} />
-        <Route path='/people/:numeric_index' component={PersonDetails} />
+        <Route path='/people/:personId' component={PersonDetails} />
         <Route path='/counter' component={Counter} />
         <Route path='/fetch-data/:startDateIndex?' component={FetchData} />
     </Layout>

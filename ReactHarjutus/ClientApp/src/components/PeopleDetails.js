@@ -15,16 +15,19 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var reactstrap_1 = require("reactstrap");
+var react_redux_1 = require("react-redux");
 var PersonDetails = /** @class */ (function (_super) {
     __extends(PersonDetails, _super);
     function PersonDetails() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     PersonDetails.prototype.render = function () {
-        if (this.props.location.state == undefined) {
+        var personId = this.props.match.params.personId;
+        var person = this.props.location.state.person;
+        //let person = this.props.people.find(x => x.id == +personId);
+        if (person === undefined) {
             return React.createElement("h1", null, "Person not found");
         }
-        var person = this.props.location.state.person;
         return (React.createElement(React.Fragment, null,
             React.createElement("h1", null,
                 "Person ",
@@ -43,12 +46,9 @@ var PersonDetails = /** @class */ (function (_super) {
                     React.createElement("tr", null,
                         React.createElement("td", null, "Weight"),
                         React.createElement("td", null, person.weight)),
-                    React.createElement("tr", null,
-                        React.createElement("td", null, "Height"),
-                        React.createElement("td", null, person.height)),
                     React.createElement("a", { href: "javascript: history.go(-1)" }, "Tagasi")))));
     };
     return PersonDetails;
 }(React.PureComponent));
-exports.PersonDetails = PersonDetails;
-//# sourceMappingURL=PersonDetails.js.map
+exports.default = react_redux_1.connect(function (state) { return state.people; })(PersonDetails);
+//# sourceMappingURL=PeopleDetails.js.map

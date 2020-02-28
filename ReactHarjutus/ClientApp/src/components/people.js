@@ -15,19 +15,11 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var reactstrap_1 = require("reactstrap");
+var react_redux_1 = require("react-redux");
 var People = /** @class */ (function (_super) {
     __extends(People, _super);
     function People() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.state = {
-            people: [
-                { id: 1, name: "Luke", gender: "male", dateOfBirth: "01.12.1900", weight: 95.6, height: 180.5 },
-                { id: 2, name: "Mary", gender: "female", dateOfBirth: "01.12.1850", weight: 50.6, height: 150.5 },
-                { id: 3, name: "Thomas", gender: "male", dateOfBirth: "01.12.1920", weight: 95.6, height: 160.5 },
-                { id: 4, name: "Sarah", gender: "female", dateOfBirth: "01.12.1930", weight: 92.0, height: 170.5 },
-                { id: 5, name: "Jeff", gender: "male", dateOfBirth: "01.12.1940", weight: 120.0, height: 140.5 },
-            ]
-        };
         _this._changeLocation = function (person) {
             _this.props.history.push("/people/" + person.id, { person: person });
         };
@@ -43,15 +35,26 @@ var People = /** @class */ (function (_super) {
                         React.createElement("th", null, "Name"),
                         React.createElement("th", null, "Gender"),
                         React.createElement("th", null, "Date of birth"))),
-                React.createElement("tbody", null, this.state.people.map(function (person) {
-                    return React.createElement(PersonDataRow, { person: person, key: person.id, onCLickHandler: function () { return _this._changeLocation(person); } });
-                })))));
+                React.createElement("tbody", null,
+                    this.props.people.map(function (person) {
+                        return React.createElement(PersonDataRow, { person: person, key: person.id, onCLickHandler: function () { return _this._changeLocation(person); } });
+                    }),
+                    this.props.people.map(function (person) {
+                        return React.createElement(PersonDeleteRow, { person: person, key: person.id, onCLickHandler: function () { return _this._changeLocation(person); } });
+                    })))));
     };
     return People;
 }(React.PureComponent));
-exports.People = People;
+exports.default = react_redux_1.connect(function (state) { return state.people; })(People);
 var PersonDataRow = function (props) { return (React.createElement("tr", { onClick: props.onCLickHandler },
     React.createElement("td", null, props.person.name),
     React.createElement("td", null, props.person.gender),
-    React.createElement("td", null, props.person.dateOfBirth))); };
+    React.createElement("td", null, props.person.dateOfBirth))
+// <a href="javascript: delete Person[props.person.id];">Kustuta</a> //PeopleStore.Person
+); };
+var PersonDeleteRow = function (props) { return (
+//<tr><a href="javascript: delete PeopleStore.Person[props.person.id];">Kustuta</a></tr>
+React.createElement("button", { onClick: props.onCLickHandler }, "delete PeopleStore.Person[props.person.id];")
+// <a href="javascript: delete Person[props.person.id];">Kustuta</a> //PeopleStore.Person
+); };
 //# sourceMappingURL=people.js.map

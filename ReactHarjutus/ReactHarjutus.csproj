@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -22,12 +22,14 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\components\people.tsx" />
-    <None Remove="ClientApp\src\components\PersonDetails.tsx" />
+    <None Remove="ClientApp\src\components\PeopleDetails.tsx" />
+    <None Remove="ClientApp\src\store\People.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\components\people.tsx" />
-    <TypeScriptCompile Include="ClientApp\src\components\PersonDetails.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\PeopleDetails.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\store\People.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
